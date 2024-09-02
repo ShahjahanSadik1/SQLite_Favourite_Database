@@ -2,6 +2,7 @@ package com.shahjahan.sqlite_favourite_database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -13,6 +14,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "users";
     public static final String DB_TABLE_NAME = "users_table";
     public static final int DB_VERSION = 1;
+
+    public static final String SELECT_ALL = "SELECT * FROM "+DB_TABLE_NAME;
     Context context;
 
 
@@ -25,6 +28,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
 
 
+    //onCreate >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
     public void onCreate(SQLiteDatabase  sqLiteDatabase) {
 
@@ -39,9 +43,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    }//>>>>>>>>>>>>>>
+    }//onCreate end here>>>>>>>>>>>>>>
 
 
+
+    //onUpgrade >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     @Override
     public void onUpgrade(SQLiteDatabase  sqLiteDatabase, int oldVersion, int newVersion) {
 
@@ -54,11 +60,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Exception :"+e, Toast.LENGTH_SHORT).show();
         }
 
-    }//>>>>>>>>>>>>>>>>>
+    }//onUpgrade end here>>>>>>>>>>>>>>>>>
 
 
 
-    //>>>>>>>>>>
+    //insertData >>>>>>>>>>>>>>>>>>>>>>>>>
     public long insertData(String name, String number ) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -70,8 +76,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         long rowId = database.insert(DB_TABLE_NAME, null, contentValues);
 
        return rowId;
+    } //insertData end here >>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+    //GetData >>>>>>>>>>>>>>>>>>>>>>>>>
+    public Cursor getData(){
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(SELECT_ALL,null);
+
+        return cursor;
     }
-    //>>>>>>>>>>>>>
+    //getData>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 

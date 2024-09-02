@@ -48,9 +48,16 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/insertData_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Button" />
+        android:text="insertData_button" />
+
+    <Button
+        android:id="@+id/displayData_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="displayData_button" />
 </LinearLayout>
