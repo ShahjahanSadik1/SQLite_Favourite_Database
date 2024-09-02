@@ -2,7 +2,17 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.SQLite_Favourite_Database" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+
+        <!--TextInputEditText color chenge-->
+         <item name="colorPrimary">#D1BE1F</item>
+
+
+        <!--Dark and light theme chenge-->
+        <item name="android:forceDarkAllowed"
+            tools:ignore="NewApi">false</item>
+
+
     </style>
 
     <style name="Theme.SQLite_Favourite_Database" parent="Base.Theme.SQLite_Favourite_Database" />

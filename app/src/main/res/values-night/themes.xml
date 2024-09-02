@@ -3,5 +3,15 @@
     <style name="Base.Theme.SQLite_Favourite_Database" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+
+        <!--TextInputEditText color chenge-->
+        <item name="colorPrimary">#D1BE1F</item>
+
+
+        <!--Dark and light theme chenge-->
+        <item name="android:forceDarkAllowed"
+            tools:ignore="NewApi">false</item>
+
     </style>
 </resources>
