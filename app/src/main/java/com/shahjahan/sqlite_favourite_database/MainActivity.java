@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MyDatabaseHelper myDatabaseHelper;
 
     TextInputEditText tie_name,tie_age,tie_gander;
-    Button insertData_button,displayData_button,update_button;
+    Button insertData_button,displayData_button,update_button,delete_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         insertData_button = findViewById(R.id.insertData_button);
         displayData_button = findViewById(R.id.displayData_button);
         update_button = findViewById(R.id.update_button);
+        delete_button = findViewById(R.id.delete_button);
 
 
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         insertData_button.setOnClickListener(this);
         displayData_button.setOnClickListener(this);
         update_button.setOnClickListener(this);
+        delete_button.setOnClickListener(this);
+
 
 
     }//Oncreate Mathod end here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -62,20 +65,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (view.getId() == R.id.insertData_button){
 
 
-            if (name.isEmpty()){
-                tie_name.setError("Enter Your Name");
+            if (name.equals("")&& number.equals("")){
+                Toast.makeText(this, "Please enter the all data.", Toast.LENGTH_SHORT).show();
 
-            }else if ( number.isEmpty()){
-                tie_age.setError("Enter Your Name");
+
             }else {
-
-
-
-
-
-
-
-
 
             long rowID =   myDatabaseHelper.insertData(name,number);
 
@@ -154,6 +148,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Update_button end here>>>>>>>>>>>>
         //Update_button end here>>>>>>>>>>>>
 
+
+
+
+        //delete_button >>>>>>>>>>>>>>>>>>>>
+        //delete_button >>>>>>>>>>>>>>>>>>>>
+        //delete_button >>>>>>>>>>>>>>>>>>>>
+        else if (view.getId() == R.id.delete_button) {
+            Integer valus = myDatabaseHelper.Delete_Data(id);
+
+            if (valus>0){
+                Toast.makeText(this, "Data is deleted", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "Data is not deleted", Toast.LENGTH_SHORT).show();
+            }
+        }//delete_button end here >>>>>>>>>>>>>>>>>>>>
+        //delete_button end here >>>>>>>>>>>>>>>>>>>>
+        //delete_button end here >>>>>>>>>>>>>>>>>>>>
 
 
     }//Button click>>>>>>>>>>>>>>>>>

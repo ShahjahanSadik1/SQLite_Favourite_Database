@@ -108,6 +108,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
 
 
+    //Delete_Data>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    public Integer Delete_Data(String id){
+
+        SQLiteDatabase database = this.getWritableDatabase();
+
+      return   database.delete(DB_TABLE_NAME,"ID = ?",new String[]{id});
+
+    }//Delete Data end here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 
