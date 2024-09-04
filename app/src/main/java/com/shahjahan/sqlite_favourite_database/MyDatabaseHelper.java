@@ -15,6 +15,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String DB_TABLE_NAME = "users_table";
     public static final int DB_VERSION = 1;
 
+    public static final String text = "text";
     public static final String SELECT_ALL = "SELECT * FROM "+DB_TABLE_NAME;
     Context context;
 
@@ -35,7 +36,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         try {
             Toast.makeText(context, "onCreate is Called", Toast.LENGTH_SHORT).show();
-            sqLiteDatabase.execSQL("CREATE TABLE " + DB_TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, number TEXT, isFavourite INTEGER) ");
+            sqLiteDatabase.execSQL("CREATE TABLE " + DB_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT, NUMBER TEXT, isFavourite INTEGER) ");
         }catch (Exception e){
 
             Toast.makeText(context, "Exception :"+e, Toast.LENGTH_SHORT).show();
@@ -68,9 +69,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public long insertData(String name, String number ) {
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("number", number);
-        contentValues.put("isFavourite", 0);
+        contentValues.put("NAME", name);
+        contentValues.put("NUMBER", number);
+        //contentValues.put("isFavourite", 0);
 
         // data insert করা হয়েছে ।
         long rowId = database.insert(DB_TABLE_NAME, null, contentValues);
@@ -88,6 +89,25 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
     //getData>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+    //insertData >>>>>>>>>>>>>>>>>>>>>>>>>
+    public boolean Update_Data(String neme, String namber ,String id) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID",id);
+        contentValues.put("NAME", neme);
+        contentValues.put("NUMBER", namber);
+        //contentValues.put("isFavourite", 0);
+
+       database.update(DB_TABLE_NAME,contentValues,"ID = ?",new String[]{id});
+       return true;
+    } //insertData end here >>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
 
 
 

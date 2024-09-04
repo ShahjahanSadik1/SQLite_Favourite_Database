@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     MyDatabaseHelper myDatabaseHelper;
 
     TextInputEditText tie_name,tie_age,tie_gander;
-    Button insertData_button,displayData_button;
+    Button insertData_button,displayData_button,update_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tie_gander = findViewById(R.id.tie_gander);
         insertData_button = findViewById(R.id.insertData_button);
         displayData_button = findViewById(R.id.displayData_button);
+        update_button = findViewById(R.id.update_button);
+
 
 
 
@@ -44,17 +46,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         insertData_button.setOnClickListener(this);
         displayData_button.setOnClickListener(this);
+        update_button.setOnClickListener(this);
+
 
     }//Oncreate Mathod end here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     @Override
     public void onClick(View view) {
 
+
         String  name = tie_name.getText().toString();
         String number = tie_age.getText().toString();
-        String gander = tie_gander.getText().toString();
+        String id = tie_gander.getText().toString();
 
         if (view.getId() == R.id.insertData_button){
+
+
+            if (name.isEmpty()){
+                tie_name.setError("Enter Your Name");
+
+            }else if ( number.isEmpty()){
+                tie_age.setError("Enter Your Name");
+            }else {
+
+
+
+
+
+
+
+
 
             long rowID =   myDatabaseHelper.insertData(name,number);
 
@@ -67,12 +88,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
 
+            }
         }//insertData_button end here
+        //insertData_button end here
+        //insertData_button end here
 
 
 
 
         //displayData_button >>>>>>>>>>>>
+        ////displayData_button >>>>>>>>>>>>
+        // displayData_button >>>>>>>>>>>>
         if (view.getId() == R.id.displayData_button){
          Cursor cursor = myDatabaseHelper.getData();
 
@@ -84,16 +110,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          }
          StringBuffer stringBuffer = new StringBuffer();
          while (cursor.moveToNext()){
-             stringBuffer.append("name : "+ cursor.getString(1)+"\n\n");
-             stringBuffer.append("number : "+ cursor.getString(2)+"\n\n");
+             stringBuffer.append("Id : "+ cursor.getString(0)+"\n");
+             stringBuffer.append("Name : "+ cursor.getString(1)+"\n");
+             stringBuffer.append("Number : "+ cursor.getString(2)+"\n\n\n\n");
 
          }
          showData("ResultSet",stringBuffer.toString());
 
 
-        }
+        }//displayData_button end here>>>>>>>>>>>>
+        //displayData_button end here>>>>>>>>>>>>
+        //displayData_button end here>>>>>>>>>>>>
+
+
+
+        //Update_button >>>>>>>>>>>>
+        //Update_button >>>>>>>>>>>>
+        //Update_button >>>>>>>>>>>>
+        else if (view.getId() == R.id.update_button) {
+
+            try {
+                boolean isUpdated = myDatabaseHelper.Update_Data(name,number,id);
+
+                tie_gander.getText().clear();
+                tie_name.getText().clear();
+                tie_age.getText().clear();
+
+
+
+                if (isUpdated) {
+                    Toast.makeText(this, "Data is Updated", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Data is Not Updated", Toast.LENGTH_SHORT).show();
+                }
+            }catch (Exception e){
+              showData("t","e");
+            }
+
+
+
+
+        }//Update_button end here>>>>>>>>>>>>
+        //Update_button end here>>>>>>>>>>>>
+        //Update_button end here>>>>>>>>>>>>
+
+
 
     }//Button click>>>>>>>>>>>>>>>>>
+
 
 
 
@@ -106,4 +170,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setCancelable(true);
         builder.show();
     }
+
+
 }//Publice class end here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
