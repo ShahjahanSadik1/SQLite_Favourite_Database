@@ -71,7 +71,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put("NAME", name);
         contentValues.put("NUMBER", number);
-        //contentValues.put("isFavourite", 0);
+        contentValues.put("isFavourite", 0);
 
         // data insert করা হয়েছে ।
         long rowId = database.insert(DB_TABLE_NAME, null, contentValues);
@@ -100,7 +100,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("ID",id);
         contentValues.put("NAME", neme);
         contentValues.put("NUMBER", namber);
-        //contentValues.put("isFavourite", 0);
+        contentValues.put("isFavourite", 0);
 
        database.update(DB_TABLE_NAME,contentValues,"ID = ?",new String[]{id});
        return true;
@@ -118,5 +118,30 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }//Delete Data end here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
+
+
+
+
+    public void updateAddFavourite(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            int value = 1;
+            db.execSQL("UPDATE " + DB_TABLE_NAME + " SET isFavourite ='" + value + "' WHERE id =" + id);
+            Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void updateRemoveFavourite(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        try {
+            int value = 0;
+            db.execSQL("UPDATE " + DB_TABLE_NAME + " SET isFavourite ='" + value + "' WHERE id =" + id);
+            Toast.makeText(context, "Un Favourite", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 }//Publice Class end here>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
